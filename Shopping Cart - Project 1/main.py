@@ -7,9 +7,20 @@ def clear(): os.system('cls')
 # Import time 
 import time
 
+# Import Json and load previous save file
+import json
+
+try:
+    with open("shopping_cart.txt") as score_file:
+        shoppingCart = json.load(score_file)
+        cartTotal = json.load(score_file)
+except:
+    print("No save files.")
+
 # Begin main()
 def main():
-
+    global shoppingCart
+    global cartTotal
     clear()
     # Main Menu Loop
     loop = True
@@ -28,7 +39,10 @@ def main():
         elif selection == "5":
             checkOut()
         elif selection == "6":
-            print("\nHave a great day!")
+            with open("shopping_cart.txt", "w") as score_file:
+                json.dump(shoppingCart, score_file)
+                json.dump(cartTotal, score_file)
+                print("\nHave a great day!")
             loop = False
         else:
             print("\nInvalid menu selection")
@@ -45,7 +59,7 @@ def displayMenu():
     print("3: Display items in cart.")
     print("4: Clear your cart and start over.")
     print("5: Calculate total and checkout.")
-    print("6: Exit")
+    print("6: Save your current cart and exit")
 
     return input("What would you like to do?: ")
     
@@ -54,6 +68,7 @@ def displayMenu():
 # Create Shopping Cart List
 shoppingCart = []
 cartTotal = 0
+
     
 def checkStock():
     clear()
@@ -111,7 +126,7 @@ def removeFromCart():
         cartTotal -= 899.99
         shoppingCart.remove(item)
         print(item + " has been removed from cart.")
-    else:
+    elif cartTotal == 0:
         print("Invalid item or there is nothing in the cart. Please try again.")
     time.sleep(2.5)
     clear()
@@ -146,6 +161,5 @@ def checkOut():
             print("Bringing you back to the home page!")
             time.sleep(2.5)
             clear()
-    
 
 main()
