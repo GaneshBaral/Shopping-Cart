@@ -149,16 +149,18 @@ def clearCart():
 def checkOut():
     clear()
     print("Your item(s) and total cost today", shoppingCart)
-    answer = input("Would you like to check out or exit(y/n): ")
+    answer = input("Would you like to check out or continue shopping(y/n): ")
     if answer == "y":
-        print("Thank you for shopping with us today! Your order is estimated \n to arrive in 3-7 buisness days.")
+        print("Thank you for shopping with us today! Your order is estimated to arrive in 3-7 buisness days.")
         time.sleep(3)
         clear()
     elif answer == 'n':
-        print("Exiting . . .")
+        print("Redirecting back to the main page")
         time.sleep(1)
         clear()
-        exit()
+    else:
+        print("Invalid response")
+        time.sleep(1)
         
         
 # end main
